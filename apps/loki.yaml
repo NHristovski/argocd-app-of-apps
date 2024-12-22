@@ -16,17 +16,18 @@ spec:
       targetRevision: 6.15.0
       helm:
         values: |
-          commonConfig:
-            replication_factor: 1
-          storage:
-            type: "filesystem"
-            filesystem:
-              chunks_directory: "/var/loki/chunks"
-              rules_directory: "/var/loki/rules"
-
-          rulerConfig:
+          loki:
+            commonConfig:
+              replication_factor: 1
             storage:
-              type: local
+              type: "filesystem"
+              filesystem:
+                chunks_directory: "/var/loki/chunks"
+                rules_directory: "/var/loki/rules"
+
+            rulerConfig:
+              storage:
+                type: local
   syncPolicy:
     automated:
       prune: true
