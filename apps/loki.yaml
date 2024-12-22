@@ -1,0 +1,40 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: loki
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: default
+  sources:
+    - repoURL: https://grafana.github.io/helm-charts
+      chart: loki
+      targetRevision: 6.15.0
+      helm:
+        values: |
+          loki:
+	    enabled: true
+            isDefault: true
+            url: http://{{(include "loki.serviceName" .)}}:{{ .Values.loki.service.port }}
+	    readinessProbe:
+	      httpGet:
+		path: /ready
+	        port: http-metrics
+	      initialDelaySeconds: 45
+	    livenessProbe:
+	      httpGet:
+	        path: /ready
+  	        port: http-metrics
+  	      initialDelaySeconds: 45
+	    datasource:
+	      jsonData: "{}"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
