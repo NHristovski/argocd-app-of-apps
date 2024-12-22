@@ -25,6 +25,15 @@ spec:
               filesystem:
                 chunks_directory: "/var/loki/chunks"
                 rules_directory: "/var/loki/rules"
+            schemaConfig:
+              configs:
+                - from: 2024-04-01
+                  object_store: filesystem
+                  store: tsdb
+                  schema: v13
+                  index:
+                    prefix: index_
+                    period: 24h
 
             rulerConfig:
               storage:
