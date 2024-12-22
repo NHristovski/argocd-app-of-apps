@@ -16,7 +16,6 @@ spec:
       targetRevision: 6.15.0
       helm:
         values: |
-          loki:
           commonConfig:
             replication_factor: 1
           storage:
