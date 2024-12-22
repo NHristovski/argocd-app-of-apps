@@ -28,6 +28,9 @@ spec:
             rulerConfig:
               storage:
                 type: local
+
+          singleBinary:
+            replicas: 1
   syncPolicy:
     automated:
       prune: true
