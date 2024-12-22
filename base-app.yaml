@@ -4,13 +4,10 @@ metadata:
   name: scalability-demo
 spec:
   destination:
+    name: in-cluster
     namespace: argocd
   source:
     path: apps
     repoURL: 'https://github.com/NHristovski/argocd-app-of-apps/'
     targetRevision: HEAD
   project: default
-   syncPolicy:
-     automated:
-       prune: true
-       selfHeal: true
