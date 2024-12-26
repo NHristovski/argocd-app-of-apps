@@ -27,7 +27,7 @@ alloy:
 
     mounts:
       varlog: true
-      dockercontainers: false
+      dockercontainers: true
 
       extra:
         - name: tmp
