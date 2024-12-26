@@ -26,9 +26,15 @@ spec:
                 access: proxy
                 isDefault: true
               - name: loki
-                type: loki
-                url: http://loki.monitoring.svc.cluster.local:3100
                 access: proxy
+                type: loki
+                jsonData:
+                  httpHeaderName1: X-Scope-OrgID
+                secureJsonData:
+                  httpHeaderValue1: 1
+                orgId: 1
+                url: http://loki.monitoring.svc.cluster.local:3100
+                
         dashboardProviders:
           dashboardproviders.yaml:
             apiVersion: 1
