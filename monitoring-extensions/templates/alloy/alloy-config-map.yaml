@@ -84,15 +84,6 @@ data:
     loki.process "free_text" {
       forward_to = [loki.write.default_loki.receiver]
 
-      stage.regex {
-        expression = "^(?s)(?P<time>\\S+?) (?P<stream>stdout|stderr) (?P<flags>\\S+?) (?P<content>.*)$"
-      }
-
-      stage.replace {
-        expression = "(.*)"
-        replace    = "{{ "{{" }} .content }}"
-      }
-
       stage.label_drop {
         values = ["filename"]
       }
@@ -156,41 +147,8 @@ data:
     loki.process "self_parse" {
       forward_to = [loki.write.default_loki.receiver]
 
-      stage.multiline {
-        firstline     = "^(?s)(?P<default_time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z) (?P<stream>stdout|stderr) (?P<flags>\\S+?) ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})\\.\\d{0,10}Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
-        max_lines     = 1024
-        max_wait_time = "5s"
-      }
-
       stage.regex {
-        expression = "^(?s)(?P<default_time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}\\.\\d+Z) (?P<stream>stdout|stderr) (?P<flags>\\S+?) ts=(?P<time>\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2})\\.\\d{0,10}Z level=(?P<level>\\w{3,10}) (?P<content>.*$)"
-      }
-
-      stage.template {
-        source   = "level"
-        template = "{{ "{{" }} ToUpper .Value }}"
-      }
-
-      stage.timestamp {
-        source = "time"
-        format = "2006-01-02T15:04:05"
-      }
-
-      stage.replace {
-        expression = "(.*)"
-        replace    = "level={{ "{{" }} .level }} {{ "{{" }} .content }}"
-      }
-
-      stage.labels {
-        values = {
-          level = null,
-        }
-      }
-
-      stage.structured_metadata {
-        values = {
-          pod = "instance",
-        }
+        expression = "^(?P<content>.*$)"
       }
 
       stage.label_drop {
