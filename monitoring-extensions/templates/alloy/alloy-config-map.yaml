@@ -84,6 +84,20 @@ data:
     loki.process "free_text" {
       forward_to = [loki.write.default_loki.receiver]
 
+      stage.json {
+        expressions = {content = "log", timestamp = "time"}
+      }
+
+      stage.timestamp {
+        source = "timestamp"
+        format = "2006-01-02T15:04:05.000000000Z"
+      }
+
+      stage.replace {
+        expression = "(.*)"
+        replace    = "{{ "{{" }} .content }}"
+      }
+
       stage.label_drop {
         values = ["filename"]
       }
