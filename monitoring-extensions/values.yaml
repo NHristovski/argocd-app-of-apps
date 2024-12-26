@@ -16,7 +16,7 @@ alloy:
       extra:
         - name: tmp
           hostPath:
-            path: /tmp
+            path: /var
 
   image:
     tag: v1.5.1
@@ -31,7 +31,7 @@ alloy:
 
       extra:
         - name: tmp
-          mountPath: /tmp
+          mountPath: /var
 
     clustering:
       enabled: false
