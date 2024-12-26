@@ -19,6 +19,8 @@ spec:
           deploymentMode: SingleBinary
           gateway:
             enabled: false
+          test:
+           enabled
           loki:
             auth_enabled: false
             commonConfig:
