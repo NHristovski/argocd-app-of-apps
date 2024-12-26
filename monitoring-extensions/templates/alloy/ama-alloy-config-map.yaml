@@ -27,7 +27,7 @@ data:
         min_backoff_period  = "1m0s"
         max_backoff_period  = "10m0s"
         max_backoff_retries = 10000000
-        tenant_id           = "CUSTOM_TENANT"
+        tenant_id           = "1"
       }
       external_labels = {}
     }
