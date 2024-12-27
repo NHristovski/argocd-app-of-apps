@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: scalability-demo-deployment
+  labels:
+    app.kubernetes.io/name: "scalability-demo"
+    logging.free.text.enabled: "true"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: scalability-demo
+  template:
+    metadata:
+      labels:
+        app: scalability-demo
+    spec:
+      containers:
+        - name: scalability-demo
+          image:  nikolahristovski/springboot-scalability:1.0.0
+          ports:
+            - containerPort: 8080
