@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         app.kubernetes.io/name: "scalability-demo"
+        logging.free.text.enabled: "true"
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: "/actuator/prometheus"
