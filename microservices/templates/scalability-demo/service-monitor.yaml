@@ -1,0 +1,11 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: scalability-demo-app-service-monitor
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "scalability-demo"
+  endpoints:
+    - port: http
+      path: "/actuator/prometheus"
