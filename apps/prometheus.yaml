@@ -25,44 +25,62 @@ spec:
           alertmanager:
             enabled: false
           extraScrapeConfigs: |
-            - job_name: 'kubernetes-service-endpoints-scrape-every-5s'
-
-              scrape_interval: 5s
-
+            - honor_labels: true
+              job_name: kubernetes-pods-5s
               kubernetes_sd_configs:
                 - role: pod
-
               relabel_configs:
-                #Custom
-                - source_labels: [__meta_kubernetes_service_annotation_example_com_scrape_every_5s]
-                  action: keep
+                - action: keep
                   regex: true
-
-                # Boilerplate
-                - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_scheme]
-                  action: replace
-                  target_label: __scheme__
+                  source_labels:
+                    - __meta_kubernetes_pod_annotation_prometheus_io_scrape5
+                - action: replace
                   regex: (https?)
-                - source_labels: [__meta_kubernetes_service_annotation_prometheus_io_path]
-                  action: replace
-                  target_label: __metrics_path__
+                  source_labels:
+                    - __meta_kubernetes_pod_annotation_prometheus_io_scheme
+                  target_label: __scheme__
+                - action: replace
                   regex: (.+)
-                - source_labels: [__address__, __meta_kubernetes_service_annotation_prometheus_io_port]
-                  action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_annotation_prometheus_io_path
+                  target_label: __metrics_path__
+                - action: replace
+                  regex: (\d+);(([A-Fa-f0-9]{1,4}::?){1,7}[A-Fa-f0-9]{1,4})
+                  replacement: '[$2]:$1'
+                  source_labels:
+                    - __meta_kubernetes_pod_annotation_prometheus_io_port
+                    - __meta_kubernetes_pod_ip
                   target_label: __address__
-                  regex: ([^:]+)(?::\d+)?;(\d+)
-                  replacement: $1:$2
+                - action: replace
+                  regex: (\d+);((([0-9]+?)(\.|$)){4})
+                  replacement: $2:$1
+                  source_labels:
+                    - __meta_kubernetes_pod_annotation_prometheus_io_port
+                    - __meta_kubernetes_pod_ip
+                  target_label: __address__
                 - action: labelmap
-                  regex: __meta_kubernetes_service_label_(.+)
-                - source_labels: [__meta_kubernetes_namespace]
-                  action: replace
-                  target_label: kubernetes_namespace
-                - source_labels: [__meta_kubernetes_service_name]
-                  action: replace
-                  target_label: kubernetes_name
-                - source_labels: [__meta_kubernetes_pod_node_name]
-                  action: replace
-                  target_label: kubernetes_node
+                  regex: __meta_kubernetes_pod_annotation_prometheus_io_param_(.+)
+                  replacement: __param_$1
+                - action: labelmap
+                  regex: __meta_kubernetes_pod_label_(.+)
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_namespace
+                  target_label: namespace
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_name
+                  target_label: pod
+                - action: drop
+                  regex: Pending|Succeeded|Failed|Completed
+                  source_labels:
+                    - __meta_kubernetes_pod_phase
+                - action: replace
+                  source_labels:
+                    - __meta_kubernetes_pod_node_name
+                  target_label: node
+              scrape_interval: 5s
+              scrape_timeout: 15s
   syncPolicy:
     automated:
       prune: true

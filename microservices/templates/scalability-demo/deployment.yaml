@@ -16,7 +16,7 @@ spec:
         app.kubernetes.io/name: "scalability-demo"
         logging.free.text.enabled: "true"
       annotations:
-        example.com/scrape_every_5s: "true"
+        prometheus.io/scrape5: "true"
         prometheus.io/path: "/actuator/prometheus"
         prometheus.io/port: "8080"
     spec:
