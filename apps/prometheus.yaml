@@ -16,6 +16,9 @@ spec:
       targetRevision: "26.0.1"
       helm:
         values: |
+          server:
+            global:
+              scrape_interval: 5s
           prometheus-pushgateway:
             enabled: false
           prometheus-node-exporter:
