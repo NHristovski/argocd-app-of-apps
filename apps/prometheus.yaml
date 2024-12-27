@@ -30,7 +30,7 @@ spec:
               scrape_interval: 5s
 
               kubernetes_sd_configs:
-                - role: endpoints
+                - role: pod
 
               relabel_configs:
                 #Custom
