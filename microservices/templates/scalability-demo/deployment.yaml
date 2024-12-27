@@ -9,11 +9,11 @@ spec:
   replicas: 2
   selector:
     matchLabels:
-      app: scalability-demo
+      app.kubernetes.io/name: "scalability-demo"
   template:
     metadata:
       labels:
-        app: scalability-demo
+        app.kubernetes.io/name: "scalability-demo"
     spec:
       containers:
         - name: scalability-demo
