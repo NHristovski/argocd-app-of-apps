@@ -7,7 +7,7 @@ metadata:
     logging.free.text.enabled: "true"
 spec:
   revisionHistoryLimit: 2
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app.kubernetes.io/name: "scalability-demo"

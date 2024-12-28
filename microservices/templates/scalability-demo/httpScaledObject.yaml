@@ -1,0 +1,17 @@
+apiVersion: http.keda.sh/v1alpha1
+kind: HTTPScaledObject
+metadata:
+  name: frontend-scaler
+  namespace: demoapplication
+  labels:
+    deploymentName: frontend
+spec:
+  host: "demo.example.com"
+  scaleTargetRef:
+    deployment: scalability-demo-deployment
+    service: scalability-demo-node-port
+    port: 30001
+  targetPendingRequests: 5
+  replicas:
+    min: 0
+    max: 2

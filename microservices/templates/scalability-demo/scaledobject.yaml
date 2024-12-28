@@ -1,19 +1,19 @@
-apiVersion: keda.sh/v1alpha1
-kind: ScaledObject
-metadata:
-  name: scalabilitydemo-scaledobject
-spec:
-  scaleTargetRef:
-    name: scalability-demo-deployment
-  pollingInterval:        5
-  initialCooldownPeriod:  0
-  cooldownPeriod:         10
-  minReplicaCount:        0
-  maxReplicaCount:        3
-  triggers:
-    - type: prometheus
-      metadata:
-        serverAddress: http://prometheus-server.monitoring.svc.cluster.local
-        metricName: http_requests_total
-        threshold: '10'
-        query: sum(custom_http_active_requests{app_kubernetes_io_name="scalability-demo"})
+{{/*apiVersion: keda.sh/v1alpha1*/}}
+{{/*kind: ScaledObject*/}}
+{{/*metadata:*/}}
+{{/*  name: scalabilitydemo-scaledobject*/}}
+{{/*spec:*/}}
+{{/*  scaleTargetRef:*/}}
+{{/*    name: scalability-demo-deployment*/}}
+{{/*  pollingInterval:        5*/}}
+{{/*  initialCooldownPeriod:  0*/}}
+{{/*  cooldownPeriod:         10*/}}
+{{/*  minReplicaCount:        0*/}}
+{{/*  maxReplicaCount:        3*/}}
+{{/*  triggers:*/}}
+{{/*    - type: prometheus*/}}
+{{/*      metadata:*/}}
+{{/*        serverAddress: http://prometheus-server.monitoring.svc.cluster.local*/}}
+{{/*        metricName: http_requests_total*/}}
+{{/*        threshold: '10'*/}}
+{{/*        query: sum(custom_http_active_requests{app_kubernetes_io_name="scalability-demo"})*/}}
