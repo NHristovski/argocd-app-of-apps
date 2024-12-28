@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: debug
+  labels:
+    app.kubernetes.io/name: "debug"
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "debug"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "debug"
+    spec:
+      containers:
+        - name: debug
+          image: nicolaka/netshoot
+          command: ["/bin/bash"]
+          args: ["-c", "sleep infinity"]
