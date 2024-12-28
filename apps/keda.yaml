@@ -12,7 +12,7 @@ spec:
   project: default
   sources:
     - repoURL: https://kedacore.github.io/charts
-      chart: kedacore/keda
+      chart: keda
       targetRevision: 2.16.0
   syncPolicy:
     automated:
