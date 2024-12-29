@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: client
+  labels:
+    app.kubernetes.io/name: "client"
+spec:
+  revisionHistoryLimit: 2
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: "client"
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: "client"
+    spec:
+      containers:
+        - name: debug
+          image: nicolaka/netshoot
+          command: ["/bin/bash"]
+          args: ["-c", "sleep infinity"]
+          volumeMounts:
+            - name: config-volume
+              mountPath: /client.sh
+              subPath: script.sh
+      volumes:
+        - name: config-volume
+          configMap:
+            name: client-script-config-map
