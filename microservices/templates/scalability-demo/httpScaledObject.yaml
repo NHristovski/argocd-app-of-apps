@@ -2,12 +2,13 @@ apiVersion: http.keda.sh/v1alpha1
 kind: HTTPScaledObject
 metadata:
   name: scalability-demo-http-scaler
-  labels:
-    deploymentName: frontend
 spec:
-  host: "scalabilitydemo.example.com"
+  hosts:
+    - "scalabilitydemo.example.com"
   scaleTargetRef:
     name: scalability-demo-deployment
+    kind: Deployment
+    apiVersion: apps/v1
     service: scalability-demo-node-port
     port: 30001
   targetPendingRequests: 5
