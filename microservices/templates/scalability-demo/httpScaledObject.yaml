@@ -7,6 +7,7 @@ metadata:
 spec:
   hosts:
     - "scalabilitydemo.example.com"
+    - keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080
   scaleTargetRef:
     name: scalability-demo-deployment
     kind: Deployment
