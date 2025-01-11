@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: client-script-config-map
+data:
+  script.sh: |
+    for i in {0..150}
+    do
+      curl http://scalability-demo-knative.project.svc.cluster.local/threeSecondsRequest &
+    done

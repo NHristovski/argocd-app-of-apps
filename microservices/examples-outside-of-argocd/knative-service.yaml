@@ -9,6 +9,9 @@ spec:
       annotations:
         # Target 10 in-flight-requests per pod.
         autoscaling.knative.dev/target: "10"
+        autoscaling.knative.dev/scale-to-zero-pod-retention-period: "5s"
+        autoscaling.knative.dev/scale-to-zero-grace-period: "5s"
+        autoscaling.knative.dev/enable-scale-to-zero: "true"
     spec:
       containers:
         - image: nikolahristovski/springboot-scalability:1.0.0
