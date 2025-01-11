@@ -12,3 +12,7 @@ spec:
     repoURL: 'https://github.com/NHristovski/argocd-app-of-apps/'
     targetRevision: HEAD
   project: default
+  syncPolicy:
+    automated:
+      selfHeal: true
+      prune: true
