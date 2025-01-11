@@ -8446,7 +8446,7 @@ data:
     # go template if needed.
     # We strongly recommend keeping namespace part of the template to avoid
     # domain name clashes:
-    # eg. '{{.Name}}-{{.Namespace}}.{{ index .Annotations "sub"}}.{{.Domain}}'
+    # eg. '{{"{{"}}.Name}}-{{"{{"}}.Namespace}}.{{"{{"}} index .Annotations "sub"}}.{{"{{"}}.Domain}}'
     # and you have an annotation {"sub":"foo"}, then the generated template
     # would be {Name}-{Namespace}.foo.{Domain}
     domain-template: "{{.Name}}.{{.Namespace}}.{{.Domain}}"
