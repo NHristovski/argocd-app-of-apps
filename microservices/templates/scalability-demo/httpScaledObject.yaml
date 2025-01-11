@@ -20,5 +20,5 @@ spec:
   scalingMetric:
     requestRate:
       granularity: 1s
-      targetValue: 10
+      targetValue: 100
       window: 30s
