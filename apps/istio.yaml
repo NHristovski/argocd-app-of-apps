@@ -12,13 +12,13 @@ spec:
   project: default
   sources:
     - repoURL: https://istio-release.storage.googleapis.com/charts
-      chart: istio/istio-base
+      chart: istio/base
       targetRevision: 1.24.2
     - repoURL: https://istio-release.storage.googleapis.com/charts
       chart: istio/istiod
       targetRevision: 1.24.2
     - repoURL: https://istio-release.storage.googleapis.com/charts
-      chart: istio/istio-ingressgateway
+      chart: istio/gateway
       targetRevision: 1.24.2
   syncPolicy:
     automated:
