@@ -24,7 +24,13 @@ spec:
             - name: config-volume
               mountPath: /client.sh
               subPath: script.sh
+            - name: config-volume-knative
+              mountPath: /client-knative.sh
+              subPath: script.sh
       volumes:
         - name: config-volume
           configMap:
             name: client-script-config-map
+        - name: config-volume-knative
+          configMap:
+            name: client-knative-script-config-map
