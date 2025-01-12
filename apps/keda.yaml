@@ -20,9 +20,9 @@ spec:
       helm:
         values: |
           interceptor:
-            tcpConnectTimeout: 25s
-            responseHeaderTimeout: 25s
-            expectContinueTimeout: 25s
+            tcpConnectTimeout: 50s
+            responseHeaderTimeout: 50s
+            expectContinueTimeout: 50s
   syncPolicy:
     automated:
       prune: true
