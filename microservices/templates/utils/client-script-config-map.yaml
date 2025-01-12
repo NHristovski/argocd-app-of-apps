@@ -6,6 +6,6 @@ data:
   script.sh: |
     for i in {0..150}
     do
-      curl -v --header "Host: scalabilitydemo.example.com" keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080/threeSecondsRequest &
+      curl --header "Host: scalabilitydemo.example.com" keda-add-ons-http-interceptor-proxy.keda.svc.cluster.local:8080/threeSecondsRequest &
     done
 
