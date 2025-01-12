@@ -12,6 +12,7 @@ spec:
         autoscaling.knative.dev/scale-to-zero-pod-retention-period: "5s"
         autoscaling.knative.dev/scale-to-zero-grace-period: "5s"
         autoscaling.knative.dev/enable-scale-to-zero: "true"
+        autoscaling.knative.dev/max-scale: "2"
     spec:
       containers:
         - image: nikolahristovski/springboot-scalability:1.0.0
