@@ -23,7 +23,7 @@ spec:
       helm:
         values: |
           service:
-            type: LoadBalancer
+            type: ClusterIP
   syncPolicy:
     automated:
       prune: true
